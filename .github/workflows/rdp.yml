@@ -21,11 +21,6 @@ jobs:
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 1
           Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
-      - name: Set RDP Password
-        run: |
-          net user runneradmin MyNewPassword123!
-          if ($LASTEXITCODE -ne 0) { exit 0 }
-
       - name: Keep Session Alive
         run: |
           $i = 0
