@@ -24,6 +24,14 @@ jobs:
 
       - name: Keep Session Alive
         run: |
+
+        - name: Set RDP Password
+        run: |
+          net user runneradmin MyNewPassword123!
+          net localgroup administrators runneradmin /add
+
+      - name: Keep Session Alive
+        run: |
           $i = 0
           while ($true) {
             Write-Host "Alive loop count: $i"
@@ -37,8 +45,4 @@ jobs:
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 1
           Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
-      - name: Set RDP Password
-        run: |
-          net user runneradmin MyNewPassword123!
-          net localgroup administrators runneradmin /add
-          
+    
