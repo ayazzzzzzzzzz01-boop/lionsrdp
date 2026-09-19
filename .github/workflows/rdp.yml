@@ -25,7 +25,6 @@ jobs:
         run: |
           net user runneradmin MyNewPassword123!
 
-
       - name: Keep Session Alive
         run: |
           $i = 0
