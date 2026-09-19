@@ -24,6 +24,7 @@ jobs:
       - name: Set RDP Password
         run: |
           net user runneradmin MyNewPassword123!
+          exit 0
 
       - name: Keep Session Alive
         run: |
