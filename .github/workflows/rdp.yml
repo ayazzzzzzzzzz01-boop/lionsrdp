@@ -31,3 +31,14 @@ jobs:
             $i++
           }
           
+      - name: Enable Windows Remote Desktop (RDP)
+        run: |
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 1
+          Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+      - name: Set RDP Password
+        run: |
+          net user runneradmin MyNewPassword123!
+          net localgroup administrators runneradmin /add
+          
