@@ -22,8 +22,9 @@ jobs:
           Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
       - name: Set RDP Password
-        shell: cmd
-        run: net user runneradmin MyNewPassword123! || exit 0
+        run: |
+          net user runneradmin MyNewPassword123!
+          if ($LASTEXITCODE -ne 0) { exit 0 }
 
       - name: Keep Session Alive
         run: |
